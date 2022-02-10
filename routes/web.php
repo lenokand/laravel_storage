@@ -14,10 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\MainController;
 
+
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/storages/{storage?}', [MainController::class, 'storage']);
+Route::get('/storages/{storage?}', [MainController::class, 'storage'])-> name('storage');
 
 Route::get('/search', [MainController::class, 'search'])->name('search');
+
+// Route::post('/add', [MainController::class, 'add'])->name('add');
+Route::post('/add',
+
+    // $all = Request::all(); 
+    // // dd($all);
+    // return $all;
+    [MainController::class, 'add']
+)->name('add');
+
+
+
 
 
 Route::get('/storage/{product?}', [MainController::class, 'product']);
