@@ -73,20 +73,20 @@
 
 
 
-<input type="text" class="form-control" value="Товар3" placeholder="name" aria-label="Username" aria-describedby="addon-wrapping" name="name">
-<input type="text" class="form-control" value="Прекрасное описание продукта	" placeholder="description" aria-label="Username" aria-describedby="addon-wrapping" name="description">
+<input type="text" class="form-control" value="Товар3" placeholder="name"  aria-describedby="addon-wrapping" name="name">
+<input type="text" class="form-control" value="Прекрасное описание продукта	" placeholder="description"  aria-describedby="addon-wrapping" name="description">
 <select name="storage_id"> <!--Supplement an id here instead of using 'name'-->
-  <option disabled selected>storage id</option>
-  <option value="1">1</option>
+  <option disabled >storage id</option>
+  <option value="1" selected>1</option>
   <option value="2" >2</option>
   <option value="3">3</option>
 </select>
 <!-- <input type="text" class="form-control" placeholder="storage_id" aria-label="Username" aria-describedby="addon-wrapping" name="storage_id"> -->
-<input type="text" class="form-control" placeholder="image" aria-label="Username" aria-describedby="addon-wrapping" name="image">
-<input type="text" class="form-control" placeholder="price" aria-label="Username" aria-describedby="addon-wrapping" name="price">
-<input type="text" class="form-control" placeholder="code" value="tovar4" aria-label="Username" aria-describedby="addon-wrapping" name="code">
-<input type="text" class="form-control" value="2017-07-23 00:00:00" placeholder="created at" aria-label="Username" aria-describedby="addon-wrapping" name="created_at">
-<input type="text" class="form-control" value="2017-07-23 00:00:00" placeholder="updated at" aria-label="Username" aria-describedby="addon-wrapping" name="updated_at">
+<input type="text" class="form-control" placeholder="image"  aria-describedby="addon-wrapping" name="image">
+<input type="text" class="form-control" placeholder="price" value="1"  aria-describedby="addon-wrapping" name="price">
+<input type="text" class="form-control" placeholder="code" value="tovar4"  aria-describedby="addon-wrapping" name="code">
+<input type="text" class="form-control" value="2017-07-23 00:00:00" placeholder="created at"  aria-describedby="addon-wrapping" name="created_at">
+<input type="text" class="form-control" value="2017-07-23 00:00:00" placeholder="updated at"  aria-describedby="addon-wrapping" name="updated_at">
 
 
 </div>

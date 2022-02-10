@@ -119,8 +119,18 @@ public function add(Request $request){
     return view('add', compact( 'storagesList', 'product_name'));
 
 }
-    public function delete($id){
-        return $id . "удалена";
+    public function del(Request $request){
+        $deleted_id = $request->id;
+
+        // dd($deleted_id);
+        DB::table('products')->where('id', '=',  $deleted_id)->delete();
+       
+
+       
+        $storagesList = Storage::get();
+        $products = Products::orderBy('name', 'desc')->paginate(10);
+
+        return view('home', compact( 'storagesList', 'deleted_id', 'products'));  ;
     }
 
 

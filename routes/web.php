@@ -30,6 +30,12 @@ Route::post('/add',
 )->name('add');
 
 
+Route::post('/del',
+
+ [MainController::class, 'del']
+)->name('del');
+
+
 
 
 
