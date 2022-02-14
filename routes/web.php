@@ -27,7 +27,12 @@ Route::post('/add',
     // // dd($all);
     // return $all;
     [MainController::class, 'add']
-)->name('add');
+        )->name('add');
+
+        
+    Route::post('/storages/{storage?}',
+    [MainController::class, 'addtostorage']
+        )->name('addtostorage');
 
 
 Route::post('/del',
@@ -39,7 +44,7 @@ Route::post('/del',
 
 
 
-Route::get('/storage/{product?}', [MainController::class, 'product']);
+// Route::get('/storage/{product?}', [MainController::class, 'product']);
 
 // Route::get('/', 'MainController@index');
 

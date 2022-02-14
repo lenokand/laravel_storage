@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 // use DB;
-use App\Models\Goodslist;
+
 use App\Models\Products;
 use App\Models\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\StorageProduct;
+use StorageProduct as GlobalStorageProduct;
 
 class MainController extends Controller
 {
@@ -15,13 +17,12 @@ public function index(){
 
     $storagesList = Storage::get();
 
-    // $users = Goodslist::all();
-    // $users = Goodslist::orderBy('name', 'desc')->get();
-    $users = Goodslist::orderBy('name', 'desc')->paginate(10);
+  
+
     $products = Products::orderBy('name', 'desc')->paginate(10);
     // dd($users);
     // dump($storagesList);
-    return view('home', compact('users', 'products', 'storagesList'));
+    return view('home', compact( 'products', 'storagesList'));
 
 }
 
@@ -29,53 +30,38 @@ public function index(){
 public function storage($storage = NULL){
     $storagesList = Storage::get();
     $storageObject = Storage::where('code', $storage)->first();
+    $quantyty = StorageProduct::where('storage_id', $storageObject->id)->orderBy('product_id', 'desc')->get();
+    $products = Products::orderBy('name', 'desc')->get();
 
-    // $products = Products::orderBy('name', 'desc')->paginate(10);
-    $products = Products::where('storage_id', $storageObject->id )->orderBy('name', 'desc')->get();
-// dump($storageObject);
-
-    // $users = Goodslist::all();
-    // $users = Goodslist::orderBy('name', 'desc')->get();
-    $users = Goodslist::orderBy('name', 'desc')->paginate(5);
-    // dd($users);
-    return view('storage', compact('users', 'storage', 'storageObject', 'storagesList', 'products'));
+    return view('storage', compact('storage', 'storageObject', 'storagesList', 'products', 'quantyty'));
 
 }
 
 
 
-public function product($product = NULL){
-    $storagesList = Storage::get();
-// dump(request());
-// dump($product);
+// public function product($product = NULL){
+//     $storagesList = Storage::get();
 
-    // $users = Goodslist::all();
-    // $users = Goodslist::orderBy('name', 'desc')->get();
-    // $users = Goodslist::orderBy('name', 'desc')->paginate(5);
-    // dd($users);
-    return view('product', ['product' => $product], compact('storagesList'));
+   
+//     return view('product', ['product' => $product], compact('storagesList'));
 
-}
+// }
 
 
 
 public function search(Request $request){
     $storagesList = Storage::get();
     $n = $request->n;
-    // $users = Goodslist::where('name', 'LIKE', "%{$n}%")->orderBy('name', 'desc')->paginate(15);
+  
     $products = Products::where('name', 'LIKE', "%{$n}%")->orderBy('name', 'desc')->paginate(15);
-    // dd($n);
+  
     return view('home', compact('products', 'storagesList'));
 
 }
  
 public function add(Request $request){
     $storagesList = Storage::get();
-    // $n = $request->n;
-    // $id = $request->id;
-    // $users = Goodslist::where('name', 'LIKE', "%{$n}%")->orderBy('name', 'desc')->paginate(15);
-    // $products = Products::where('name', 'LIKE', "%{$id}%")->orderBy('name', 'desc')->paginate(15);
-    // dd($n);
+   
     $product_name = $request->name;
 
 
@@ -98,34 +84,71 @@ public function add(Request $request){
         'price'=> $request->price,
         'created_at'=> $request->created_at,
         'updated_at'=> $request->updated_at
-        // 'storage_id'=>'2',
-        // 'code'=>'tovar123',
-        // 'name' => 'kayla@example.com',
-        // 'description' => 'Прекрасное описание продукта ',
-   
-        // 'image'=> Null,
-        // 'price'=> 55,
-        // 'created_at'=>'2017-07-23 00:00:00.000000',
-        // 'updated_at'=>'2017-07-23 00:00:00.000000'
+       
 
     ]);
     
 
     
-    // $products = Products::where('name', 'LIKE', "%{$n}%")->orderBy('name', 'desc')->paginate(15);
-    // dd($product_name);
-    // return view('home', compact('products', 'storagesList'));
-    // return $request;
+   
     return view('add', compact( 'storagesList', 'product_name'));
 
 }
+
+
+public function addtostorage(Request $request){
+    $storagesList = Storage::get();
+   
+    $product_name = $request->name;
+
+
+
+    // $validation = $request->validate([
+
+    //     'product_id' => 'required',
+    //     'quantity' => 'required'
+    // ]);
+    $searchproductinstore = StorageProduct::where('storage_id', '=', $request->storage_id)->where('product_id', '=', $request->product_id)->first();
+
+     if( $searchproductinstore == null){
+
+        DB::table('storage_products')->insert([
+
+            'storage_id'=>$request->storage_id,
+            
+            'product_id'=> $request->product_id,
+            'quanity'=> $request->quantity,
+            'created_at'=> $request->created_at,
+            'updated_at'=> $request->updated_at
+       
+        ]);
+
+
+
+     } else{
+
+        $searchproductinstore->update([
+            "quanity"=> $request->quantity,
+            // 'updated_at'=> $request->updated_at       
+        ]);
+      
+     }
+    
+
+    
+   
+    return view('addtostorage', compact( 'storagesList', 'product_name'));
+
+}
+
+
+
+
     public function del(Request $request){
         $deleted_id = $request->id;
 
-        // dd($deleted_id);
+      
         DB::table('products')->where('id', '=',  $deleted_id)->delete();
-       
-
        
         $storagesList = Storage::get();
         $products = Products::orderBy('name', 'desc')->paginate(10);

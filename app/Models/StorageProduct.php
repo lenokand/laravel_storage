@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StorageProduct extends Model
 {
+    protected $fillable = ['storage_id', 'product_id'];
+    protected $table = 'storage_products';
     use HasFactory;
 }

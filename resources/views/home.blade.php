@@ -63,4 +63,53 @@
 <div> Записи не найдены</div>
 
 @endif
+
+<div class="container my-5">
+  <div class=" my-2">
+    Добавление новой строки в список товаров
+  </div>
+      <form action="{{ route('add') }}" method="post" >
+      @csrf
+      <div class="input-group flex-nowrap pb-3">
+
+
+
+
+      <input type="text" class="form-control" value="Товар3" placeholder="name"  aria-describedby="addon-wrapping" name="name">
+      <input type="text" class="form-control" value="Прекрасное описание продукта	" placeholder="description"  aria-describedby="addon-wrapping" name="description">
+      <select name="storage_id"> <!--Supplement an id here instead of using 'name'-->
+        <option disabled >storage id</option>
+
+        @if(count($storagesList))
+
+            @foreach($storagesList as $storage)
+            <option value="{{$storage ->id}}" >{{$storage ->name}}</option>
+            @endforeach
+            @else
+
+            <option disabled>товары отсутствуют</option>
+            @endif
+        
+      </select>
+      <!-- <input type="text" class="form-control" placeholder="storage_id" aria-label="Username" aria-describedby="addon-wrapping" name="storage_id"> -->
+      <input type="text" class="form-control" placeholder="image"  aria-describedby="addon-wrapping" name="image">
+      <input type="text" class="form-control" placeholder="price" value="1"  aria-describedby="addon-wrapping" name="price">
+      <input type="text" class="form-control" placeholder="code" value="tovar4"  aria-describedby="addon-wrapping" name="code">
+      <input type="text" class="form-control" value="2017-07-23 00:00:00" placeholder="created at"  aria-describedby="addon-wrapping" name="created_at">
+      <input type="text" class="form-control" value="2017-07-23 00:00:00" placeholder="updated at"  aria-describedby="addon-wrapping" name="updated_at">
+
+
+      </div>
+      <button type="submit" class="input-group-text" id="addon-wrapping">Добавить новый товар</button>
+      </form>
+@if($errors->any())
+<div class="alert alert-danger">
+@foreach($errors->all() as $error)
+<li>{{$error}}</li>
+@endforeach
+
+
+</div>
+@endif
+
 @endsection
