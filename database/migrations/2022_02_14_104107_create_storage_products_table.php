@@ -18,7 +18,7 @@ class CreateStorageProductsTable extends Migration
 
             $table->id();
             $table->integer('storage_id');
-            $table->string('product_name');
+            $table->string('product_id');
             
             $table->double('quanity')->default(0);
             $table->timestamps();
