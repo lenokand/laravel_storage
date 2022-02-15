@@ -29,11 +29,16 @@ public function index(){
 
 public function storage($storage = NULL){
     $storagesList = Storage::get();
+
     $storageObject = Storage::where('code', $storage)->first();
+
+
     $quantyty = StorageProduct::where('storage_id', $storageObject->id)->orderBy('product_id', 'desc')->get();
     $products = Products::orderBy('name', 'desc')->get();
-
-    return view('storage', compact('storage', 'storageObject', 'storagesList', 'products', 'quantyty'));
+    $minquantity= $quantyty->min('quanity');
+    $maxquantity= $quantyty->max('quanity');
+   
+    return view('storage', compact('storage', 'storageObject', 'storagesList', 'products', 'quantyty', 'minquantity', 'maxquantity'));
 
 }
 

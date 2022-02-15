@@ -40,7 +40,7 @@ Route::post('/del',
  [MainController::class, 'del']
 )->name('del');
 
-Route::post('/del',
+Route::post('/delfromstorage',
 
  [MainController::class, 'delfromstorage']
 )->name('delfromstorage');

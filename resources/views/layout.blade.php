@@ -61,6 +61,19 @@
         justify-content: center;
         text-align: center;
       }
+
+      .bg-custommax th,
+      .bg-custommax td{
+        background-color: #20c997;
+        box-shadow:inset 0 0 0 9999px #20c997;
+        
+      }
+      .bg-custom th,
+      .bg-custom td{
+        background-color: #6f42c1;
+        box-shadow:inset 0 0 0 9999px #6f42c1;
+        color: #fff!important;
+      }
     </style>
 </body>
 </html>

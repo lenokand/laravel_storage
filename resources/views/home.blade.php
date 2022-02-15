@@ -13,6 +13,9 @@
         <button type="submit" class="input-group-text" id="addon-wrapping">Искать</button>
         </div>
     </form>
+
+
+
 @if(count($products))
 <h2> Все товары({{count($products)}} шт)</h2>
 
@@ -32,7 +35,7 @@
                 <!-- <th scope="col">storage number</th>
                 <th scope="col">storage name</th> -->
                 <th scope="col">price</th>
-                <th scope="col">code</th>
+                <!-- <th scope="col">code</th> -->
                 <th scope="col">created at</th>
                 <th scope="col">updated at</th>
                 <th scope="col">удалить</th>
@@ -50,10 +53,12 @@
                     <!-- <td>{{$product ->storage_id }} </td> 
                     <td>{{$product->storage->name}} </td>  -->
                     <td>{{$product ->price  }} </td> 
-                    <td>{{$product ->code  }} </td> 
+                    <!-- <td>{{$product ->code  }} </td>  -->
                     <td>{{$product ->created_at  }} </td> 
                     <td>{{$product ->updated_at  }} </td> 
-                    <td><form action="{{ route('del') }}" method="post">@csrf <input name="id" value="{{$product ->id  }}" type="text" hidden> <button type="submit" class="btn btn-warning">delete</button> </form></td> 
+                    <td>
+                      <form action="{{ route('del') }}" method="post">@csrf <input name="id" value="{{$product ->id  }}" type="text" hidden> <button type="submit" class="btn btn-warning">delete</button> </form>
+                    </td> 
                    
                 </tr>
               

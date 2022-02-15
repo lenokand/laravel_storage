@@ -29,8 +29,8 @@
       
         @foreach($quantyty as $product)
       
-                <tr>
-                    <th scope="row">{{$product ->storage_id}} </th>
+                <tr class="@if($product ->quanity == $minquantity) bg-custom @elseif($product ->quanity == $maxquantity) bg-custommax @endif">
+                    <th   scope="row">{{$product ->storage_id}} </th>
                     <td>{{$product ->product_id}} </td> 
                     <td>{{$product ->quanity}} </td> 
                     <td>{{$product ->created_at  }} </td> 
