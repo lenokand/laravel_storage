@@ -16,18 +16,13 @@
 <table class="table table-success table-striped">
             <thead>
                 <tr>
-                <!-- <th scope="col">#</th>
-                <th scope="col">name</th>
-                <th scope="col">character</th>
-                <th scope="col">storage number</th>
-                <th scope="col">storage name</th>
-                <th scope="col">storage adres</th>
-                 -->
+              
                 <th scope="col">storage_id</th>
                 <th scope="col">product_id</th>
                 <th scope="col">quantity</th>
                 <th scope="col">created at</th>
                 <th scope="col">updated at</th>
+                <th scope="col">delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +35,13 @@
                     <td>{{$product ->quanity}} </td> 
                     <td>{{$product ->created_at  }} </td> 
                     <td>{{$product ->updated_at  }} </td> 
-                   
+                    <td>
+                      <form action="{{ route('delfromstorage') }}" method="post">@csrf <input name="product_id" value="{{$product ->product_id  }}" type="text" hidden>
+                      <input name="storage_id" value="{{$storageObject->id}}" type="text" hidden>
+
+                      <button type="submit" class="btn btn-warning">delete</button> 
+                      </form>
+                    </td> 
                 </tr>
               
                

@@ -1,10 +1,18 @@
 @extends('layout')
 
+
 @section('title', 'Все магазины')
 
 
 @section('content')
+<form action="{{ route('search')}}" method="get">
 
+        <div class="input-group flex-nowrap pb-5">
+       
+        <input type="text" class="form-control" placeholder="Поиск по имени по всем товарам" aria-label="Username" aria-describedby="addon-wrapping" name="n">
+        <button type="submit" class="input-group-text" id="addon-wrapping">Искать</button>
+        </div>
+    </form>
 @if(count($products))
 <h2> Все товары({{count($products)}} шт)</h2>
 
@@ -21,8 +29,8 @@
                 <th scope="col">#</th>
                 <th scope="col">name</th>
                 <th scope="col">description</th>
-                <th scope="col">storage number</th>
-                <th scope="col">storage name</th>
+                <!-- <th scope="col">storage number</th>
+                <th scope="col">storage name</th> -->
                 <th scope="col">price</th>
                 <th scope="col">code</th>
                 <th scope="col">created at</th>
@@ -39,8 +47,8 @@
                     <th scope="row">{{$product ->id}} </th>
                     <td>{{$product ->name}} </td> 
                     <td>{{$product ->description}} </td> 
-                    <td>{{$product ->storage_id }} </td> 
-                    <td>{{$product->storage->name}} </td> 
+                    <!-- <td>{{$product ->storage_id }} </td> 
+                    <td>{{$product->storage->name}} </td>  -->
                     <td>{{$product ->price  }} </td> 
                     <td>{{$product ->code  }} </td> 
                     <td>{{$product ->created_at  }} </td> 
@@ -77,20 +85,7 @@
 
       <input type="text" class="form-control" value="Товар3" placeholder="name"  aria-describedby="addon-wrapping" name="name">
       <input type="text" class="form-control" value="Прекрасное описание продукта	" placeholder="description"  aria-describedby="addon-wrapping" name="description">
-      <select name="storage_id"> <!--Supplement an id here instead of using 'name'-->
-        <option disabled >storage id</option>
-
-        @if(count($storagesList))
-
-            @foreach($storagesList as $storage)
-            <option value="{{$storage ->id}}" >{{$storage ->name}}</option>
-            @endforeach
-            @else
-
-            <option disabled>товары отсутствуют</option>
-            @endif
-        
-      </select>
+    
       <!-- <input type="text" class="form-control" placeholder="storage_id" aria-label="Username" aria-describedby="addon-wrapping" name="storage_id"> -->
       <input type="text" class="form-control" placeholder="image"  aria-describedby="addon-wrapping" name="image">
       <input type="text" class="form-control" placeholder="price" value="1"  aria-describedby="addon-wrapping" name="price">

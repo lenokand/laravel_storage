@@ -75,7 +75,7 @@ public function add(Request $request){
 
 
  
-        'storage_id'=> $request->storage_id,
+        // 'storage_id'=> $request->storage_id,
         'code'=> $request->code,
         'name' => $request->name,
         'description' => $request->description,
@@ -103,11 +103,11 @@ public function addtostorage(Request $request){
 
 
 
-    // $validation = $request->validate([
+    $validation = $request->validate([
 
-    //     'product_id' => 'required',
-    //     'quantity' => 'required'
-    // ]);
+        'product_id' => 'required',
+        'quantity' => 'required'
+    ]);
     $searchproductinstore = StorageProduct::where('storage_id', '=', $request->storage_id)->where('product_id', '=', $request->product_id)->first();
 
      if( $searchproductinstore == null){
@@ -125,12 +125,15 @@ public function addtostorage(Request $request){
 
 
 
-     } else{
-
-        $searchproductinstore->update([
-            "quanity"=> $request->quantity,
+     } else {
+        // dd($request->quantity);
+       
+        DB::table('storage_products')->where('storage_id', '=', $request->storage_id)->where('product_id', '=', $request->product_id)->update([
+            'quanity'=> $request->quantity,
             // 'updated_at'=> $request->updated_at       
         ]);
+        dump($request->quantity);
+        
       
      }
     
@@ -154,6 +157,38 @@ public function addtostorage(Request $request){
         $products = Products::orderBy('name', 'desc')->paginate(10);
 
         return view('home', compact( 'storagesList', 'deleted_id', 'products'));  ;
+    }
+
+
+    public function delfromstorage(Request $request){
+
+        $deleted_id = $request->product_id;
+      
+
+        DB::table('storage_products')->where('storage_id', '=', $request->storage_id)->where('product_id', '=', $request->product_id)->delete();
+
+        $storage =  $request->storage_id;
+
+
+     
+        $storagesList = Storage::get();
+        $storageObject = Storage::where('id', $storage)->first();
+        $quantyty = StorageProduct::where('storage_id', $storageObject->id)->orderBy('product_id', 'desc')->get();
+        $products = Products::orderBy('name', 'desc')->get();
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+        return view('storage', compact('storage', 'storagesList', 'storageObject', 'deleted_id', 'products', 'quantyty')); 
     }
 
 

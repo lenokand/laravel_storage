@@ -43,14 +43,7 @@
 </ul>
 </div>
 <div class="container ">
-  <form action="{{ route('search')}}" method="get">
-
-        <div class="input-group flex-nowrap pb-5">
-       
-        <input type="text" class="form-control" placeholder="Поиск по имени по всем товарам" aria-label="Username" aria-describedby="addon-wrapping" name="n">
-        <button type="submit" class="input-group-text" id="addon-wrapping">Искать</button>
-        </div>
-    </form>
+  
     @yield('content')
 </div>
 

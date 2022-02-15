@@ -30,7 +30,7 @@ Route::post('/add',
         )->name('add');
 
         
-    Route::post('/storages/{storage?}',
+Route::post('/storages/{storage?}',
     [MainController::class, 'addtostorage']
         )->name('addtostorage');
 
@@ -39,6 +39,11 @@ Route::post('/del',
 
  [MainController::class, 'del']
 )->name('del');
+
+Route::post('/del',
+
+ [MainController::class, 'delfromstorage']
+)->name('delfromstorage');
 
 
 
