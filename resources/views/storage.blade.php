@@ -3,13 +3,17 @@
 @section('title', $storageObject->name)
 
 @section('content')
-<h2> {{$storageObject->name}}({{count($quantyty)}} шт)</h2>
-<div class="mx-auto mb-5">Контент страницы магазина </div>
+<h2> {{$storageObject->name}}</h2>
+<h5>
+  Наименование товаров: ({{count($quantyty)}} шт)
+</h5>
+<h5>
+  Общее количество едениц товаров: {{$summary}}
+</h5>
+<div class="mx-auto mb-5">{{$storageObject->description}} </div>
+
 <div class="">
-    
-</div>
-<div class="">
-{{$storageObject->description}}
+
 
 </div>
 @if(count($quantyty))
